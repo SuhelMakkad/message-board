@@ -1,5 +1,5 @@
 import defaultAxios from "axios";
-import type { Message, PostMessageError } from "./types";
+import type { Message } from "./types";
 
 const axios = defaultAxios.create({
   headers: {
@@ -10,7 +10,7 @@ const axios = defaultAxios.create({
 export const baseUrl = "https://mapi.harmoney.dev/api/v1";
 
 export const getMessages = async () => {
-  const reqUrl = baseUrl + "/messages";
+  const reqUrl = baseUrl + "/messages/";
 
   try {
     const res = await axios.get<Message[]>(reqUrl);
@@ -22,14 +22,13 @@ export const getMessages = async () => {
 };
 
 export const postMessage = async (text: string) => {
-  const reqUrl = baseUrl + "/messages";
+  const reqUrl = baseUrl + "/messages/";
 
   try {
     const res = await axios.post<Message>(reqUrl, { text });
     return res.data;
   } catch (e) {
     console.error(e);
-    return e as PostMessageError;
   }
 };
 

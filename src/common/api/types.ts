@@ -4,7 +4,3 @@ export type Message = {
   source: string;
   timestamp: string;
 };
-
-export type PostMessageError = {
-  text: string;
-};
