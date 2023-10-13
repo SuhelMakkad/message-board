@@ -1,7 +1,9 @@
 import { useState, type FormEvent } from "react";
 import { postMessage } from "@/api/index";
+import { useMessagesStore } from "@/stores/messages";
 
 const PostMessageTextBox = () => {
+  const addMessages = useMessagesStore((state) => state.addMessages);
   const [isPostLoading, setIsPostLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -14,7 +16,10 @@ const PostMessageTextBox = () => {
 
     setIsPostLoading(true);
     const res = await postMessage(message);
-    console.log(res);
+
+    if (res) {
+      addMessages([res]);
+    }
 
     setIsPostLoading(false);
     form.reset();

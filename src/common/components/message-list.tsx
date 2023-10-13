@@ -1,17 +1,17 @@
-import { useState, useEffect } from "react";
-
+import { useEffect } from "react";
 import UserCircle from "@/components/icon/user-circle";
 
 import { formatDate } from "@/utils/data";
 import { getMessages } from "@/api/index";
 import type { Message } from "@/api/types";
+import { useMessagesStore } from "@/stores/messages";
 
 const MessageList = () => {
-  const [messages, setMessages] = useState<Message[] | null>(null);
+  const { messages, addMessages } = useMessagesStore();
 
   useEffect(() => {
-    getMessages().then((m) => setMessages(m));
-  }, []);
+    getMessages().then((m) => addMessages(m));
+  }, [addMessages]);
 
   if (!messages) {
     return "loading...";

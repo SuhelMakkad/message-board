@@ -10,6 +10,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/components": getPath("./src/common/components"),
+      "@/stores": getPath("./src/common/stores"),
       "@/utils": getPath("./src/common/utils"),
       "@/api": getPath("./src/common/api"),
       "@/": getPath("./src"),
