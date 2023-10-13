@@ -5,6 +5,7 @@ import type { Message } from "@/api/types";
 
 interface MessagesState {
   messages: Message[] | null;
+  setMessage: (messages: Message[]) => void;
   addMessages: (messages: Message[]) => void;
   removeMessages: (messageIds?: number[]) => Promise<void>;
 }
@@ -20,6 +21,7 @@ export const useMessagesStore = create<MessagesState>()(
     persist(
       (set, get) => ({
         messages: null,
+        setMessage: (messages) => set({ messages }),
         addMessages: (messages) => {
           set((state) => {
             const newMessages: Message[] = state.messages ? state.messages : messages;
@@ -46,14 +48,10 @@ export const useMessagesStore = create<MessagesState>()(
           if (!messageIds) return;
 
           await deleteMessageFromDb(messageIds);
-          messageIds.forEach((messageId) => {
-            const prevIndex = prevMessage?.findIndex((m) => m.id === messageId);
-            if (prevIndex && prevIndex >= 0) {
-              prevMessage?.splice(prevIndex, 1);
-            }
-          });
 
-          set({ messages: prevMessage });
+          if (!prevMessage) return;
+
+          set({ messages: prevMessage.filter((m) => !messageIds.includes(m.id)) });
         },
       }),
       {

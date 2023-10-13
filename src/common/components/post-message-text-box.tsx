@@ -44,11 +44,11 @@ const PostMessageTextBox = () => {
         placeholder="Whats Happing?!"
       />
 
-      <div className="flex justify-end gap-2">
+      <div className="flex justify-end gap-2 mt-2">
         <button
           disabled={isPostLoading}
           type="submit"
-          className="bg-gray-700 hover:opacity-90 font-medium text-white text-sm md:text-base rounded-full px-5 py-2 leading-none disabled:opacity-80"
+          className="bg-gray-700 hover:opacity-90 font-medium text-white text-xs md:text-sm rounded-full px-5 py-2 leading-none disabled:opacity-80"
         >
           {isPostLoading ? "Posting..." : "Post"}
         </button>
@@ -57,7 +57,7 @@ const PostMessageTextBox = () => {
           onClick={handleDeleteAll}
           disabled={isDeleteLoading}
           type="button"
-          className="border-current text-red-500 font-medium border hover:text-red-400 text-sm md:text-base rounded-full px-5 py-2 leading-none disabled:opacity-80"
+          className="border-current text-red-500 font-medium border hover:text-red-400 text-xs md:text-sm rounded-full px-5 py-1.5 leading-none disabled:opacity-80"
         >
           {isDeleteLoading ? "Deleting..." : "Delete All"}
         </button>
