@@ -15,7 +15,20 @@ const MessageList = () => {
   }, [setMessage]);
 
   if (!messages) {
-    return "loading...";
+    return (
+      <div className="min-h-[50vh] grid place-content-center text-center">
+        <h2 className="font-medium text-base md:text-lg">Loading your Posts</h2>
+      </div>
+    );
+  }
+
+  if (!messages.length) {
+    return (
+      <div className="min-h-[50vh] grid place-content-center text-center">
+        <h2 className="font-medium text-base md:text-lg">Its empty around here</h2>
+        <p className="text-xs md:text-sm">Start a new post by clicking post button above</p>
+      </div>
+    );
   }
 
   return (
