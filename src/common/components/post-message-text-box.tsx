@@ -3,8 +3,9 @@ import { postMessage } from "@/api/index";
 import { useMessagesStore } from "@/stores/messages";
 
 const PostMessageTextBox = () => {
-  const addMessages = useMessagesStore((state) => state.addMessages);
+  const { addMessages, removeMessages } = useMessagesStore();
   const [isPostLoading, setIsPostLoading] = useState(false);
+  const [isDeleteLoading, setIsDeleteLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -23,6 +24,12 @@ const PostMessageTextBox = () => {
 
     setIsPostLoading(false);
     form.reset();
+  };
+
+  const handleDeleteAll = async () => {
+    setIsDeleteLoading(true);
+    await removeMessages();
+    setIsDeleteLoading(false);
   };
 
   return (
@@ -46,14 +53,14 @@ const PostMessageTextBox = () => {
           {isPostLoading ? "Posting..." : "Post"}
         </button>
 
-        {/* <button
+        <button
           onClick={handleDeleteAll}
-          disabled={isPostLoading}
+          disabled={isDeleteLoading}
           type="button"
           className="border-current text-red-500 font-medium border hover:text-red-400 text-sm md:text-base rounded-full px-5 py-2 leading-none disabled:opacity-80"
         >
-          {isPostLoading ? "Deleting..." : "Delete All"}
-        </button> */}
+          {isDeleteLoading ? "Deleting..." : "Delete All"}
+        </button>
       </div>
     </form>
   );

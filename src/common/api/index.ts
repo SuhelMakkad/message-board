@@ -32,7 +32,7 @@ export const postMessage = async (text: string) => {
   }
 };
 
-export const deleteMessage = async (messageId: string) => {
+export const deleteMessage = async (messageId: number) => {
   const reqUrl = baseUrl + "/messages/" + messageId;
 
   try {
